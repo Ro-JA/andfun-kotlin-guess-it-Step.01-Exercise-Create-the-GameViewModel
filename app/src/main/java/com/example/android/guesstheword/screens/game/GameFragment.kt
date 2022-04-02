@@ -24,14 +24,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
 
-/**
- * Fragment where the game is played
- */
+
 class GameFragment : Fragment() {
 
     // The current word
@@ -45,20 +42,21 @@ class GameFragment : Fragment() {
 
     private lateinit var binding: GameFragmentBinding
 
-    private lateinit var  viewModel: GameViewModel
+    private lateinit var viewModel: GameViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.game_fragment,
-                container,
-                false
+            inflater,
+            R.layout.game_fragment,
+            container,
+            false
         )
 
-        // TODO (04) Create and initialize a GameViewModel, using ViewModelProvider; Add a log
         Log.i("GameFragment", "Called ViewModelProvider")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
@@ -67,11 +65,13 @@ class GameFragment : Fragment() {
         binding.correctButton.setOnClickListener {
             viewModel.onCorrect()
             updateScoreText()
-            updateWordText()}
+            updateWordText()
+        }
         binding.skipButton.setOnClickListener {
             viewModel.onSkip()
             updateWordText()
-            updateScoreText()}
+            updateScoreText()
+        }
         updateScoreText()
         updateWordText()
         return binding.root
